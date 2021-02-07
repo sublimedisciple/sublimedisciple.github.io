@@ -33,11 +33,11 @@
                 </div>
                 <form class="col-6 col-md input-field text-white text-center font-weight-bold my-4" onsubmit="return false">
                     <label>Total Health</label>
-                    <input v-model="TotalHealth" type="number" class="form-control p-3" min="100" max="1030" value="100" step="10" />
+                    <input @wheel="wheel" v-model="TotalHealth" type="number" class="form-control p-3" min="100" max="1030" value="100" step="10" />
                 </form>
                 <form class="col-6 col-md input-field text-white text-center font-weight-bold my-4" onsubmit="return false">
                     <label>Current DR%</label>
-                    <input v-model="CurrentDR" type="number" class="form-control p-3" min="0" max="87" value="0" />
+                    <input @wheel="wheel" v-model="CurrentDR" type="number" class="form-control p-3" min="0" max="87" value="0" />
                 </form>
                 <div class="col-4 col-md  text-white text-center font-weight-bold my-4">
                     <label>AutoEat Level</label>
@@ -621,7 +621,10 @@ app = new Vue({
                 case "Magic":
                     return 2;
             }
-        }
+        },
+        wheel(){
+            // don't do anything
+        },
     },
     computed: {
         autoEatThreshold(){
