@@ -8,7 +8,6 @@
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
         <link rel="manifest" href="./site.webmanifest">
         <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
-        <link rel="stylesheet" href="idle/style.css">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -80,13 +79,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="monster in monsters.filter(m => m.slayerTier == this.SlayerTier)" :class="{idleable : isIdleable(monster)}">
+                        <tr v-for="monster in monsters.filter(m => m.slayerTier == this.SlayerTier)" :class="{idleable : isIdleable(monster) && monster.name !== 'Wicked Greater Dragon', warning: monster.name == 'Wicked Greater Dragon'}">
                             <td>{{minDR(monster)}}</td>
                             <td>{{minHP(monster)}}</td>
                             <td>{{monster.name}}</td>
                             <td>{{monster.attackStyle}}</td>
                             <td>{{monster.maxHit}}</td>
-                            <td>{{reducedMaxHit(monster)}}</td>
+                            <td>{{(monster.name !== 'Wicked Greater Dragon') ? reducedMaxHit(monster) : 'The max hit of this monster depends on your max hit and so cannot be calculated'}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -623,8 +622,8 @@ app = new Vue({
             }
         },
         wheel(){
-            // don't do anything
-        },
+            // do nothing
+        }
     },
     computed: {
         autoEatThreshold(){
